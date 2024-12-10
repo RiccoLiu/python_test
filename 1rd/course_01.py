@@ -1,133 +1,173 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# 数据类型转换
-# int             整型
-# float           浮点型
-# complex         复数
-
-# chr             字符
-# str             字符串
-
-# ord(x)          字符转整型
-# hex(x)          整型转16进制字符串
-# oct(x)          整型转8进制字符串
-# repr            表达式字符串
-
-# eval(str)       用来计算在字符串中的有效Python表达式,并返回一个对象
-
-# tuple()         元组
-# list()          将序列 s 转换为一个列表
-# set()           转换为可变集合
-# frozenset(s)    不可变集合
-# dict(d)         字典
-
-
-# 数字运算 & 字符串 & 列表 
-#
-# 一、数字运算 
-# + 加法 
-# - 减法 
-# * 乘法 
-# / 除法 - 返回浮点数
-# % 取余 
-# // 除法 - 向下取整
-# ** 乘方 
-
-# 1、混合类型运算时会把整数转换为浮点数
-# 2、交互模式下会把上次输出的表达式会赋给变量 _ ,下次计算是可以直接使用 _ 变量
-# 3、 ** 比 - 的优先级更高, 所以 -3**2 会被解释成 -(3**2) ，因此，结果是 -9。要避免这个问题，并且得到 9, 可以用 (-3)**2
-
-# 二、字符串
-# 使用单引号 ('...') 和双引号 ("...") 表示字符串，反斜杠 (\) 用于转义字符
-
-# 1、如果不想使用转义字符 (\), 可以在字符串前加 (r)
-#    print(r'C:\some\name')
-#
-# 2、字符串可以包含多行时，可以使用 """...""" 或 '''...'''
-#
-# 3、字符串可以用 + 合并（粘到一起），也可以用 * 重复
-#   print(3 * 'un' + 'ium');  print('Py' 'thon')
-# 
-# 4、字符串拼接
-# 4.1.多字符串自动拼接
-#    text = ('Put several strings within parentheses '
-#           'to have them joined together.')
-# 4.2.变量与字符串拼接使用 + 
-#
-# 5、字符串支持下标访问, 下标可以是负数
-#   word = 'Python'; word[0] = 'P';  word[-1] = 'n'
-#
-# 6、字符串切片 - 下标从 0 开始，不包括末尾最后一个元素
-#   word = 'Python'; word[:2] = 'Py';  word[2:] = 'thon'; word[2:6] = 'thon'
-#
-# 7、下标索引越界会报错，切片越界会自行处理，不会报错
-#   word[4:42] = "on"; word[42:] = "";
-#
-# 8、字符串是不能修改的，如果要想修改应该新建一个新的字符串
-#   "j" + word[1:] = "jython";
-#
-# 9、len() 函数可以返回字符串的长度
-#
-# 三、列表
-# 列表使用方括号标注，逗号分隔的一组值
-#   squares = [1, 4, 9, 16, 25]
-# 
-# 1、列表支持索引和切片, 切片操作返回包含请求元素的新列表 - 深拷贝
-#   squares[-1]; squares[-3:];
-#
-# 2、列表支持合并操作
-#   squares + [36, 49, 64, 81, 100]
-#
-# 3、列表的元素是可以通过下标修改的
-#   squares[0] = 1234; 
-#
-# 4、append() 函数可以在列表末尾添加新的元素
-# 
-# 5、列表为切片赋值可以改变列表大小，甚至清空整个列表：
-# >>> letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
-# >>> letters
-# ['a', 'b', 'c', 'd', 'e', 'f', 'g']
-# >>> # replace some values
-# >>> letters[2:5] = ['C', 'D', 'E']
-# >>> letters
-# ['a', 'b', 'C', 'D', 'E', 'f', 'g']
-# >>> # now remove them
-# >>> letters[2:5] = []
-# >>> letters
-# ['a', 'b', 'f', 'g']
-# >>> # clear the list by replacing all the elements with an empty list
-# >>> letters[:] = []
-# >>> letters
-#  
-# 6、len() 函数也可以返回列表的长度
-#
-# 7、列表可以嵌套列表 - 包含其他列表的列表
-# >>> a = ['a', 'b', 'c']
-# >>> n = [1, 2, 3]
-# >>> x = [a, n]
-# >>> x
-# [['a', 'b', 'c'], [1, 2, 3]]
-# >>> x[0]
-# ['a', 'b', 'c']
-# >>> x[0][1]
-# 'b'
-
-if __name__ == '__main__':
-    # Fibonacci series:
-    # the sum of two elements defines the next
-    a, b = 0, 1
-    while (a < 1000) :
-        a, b = b, a+b
-        if b < 1000 :
-            print(a, end = ",")
-        else :
-            print(a)
-            break
-
 # 1、多重赋值，a, b = 0, 1, a, b = b, a+b
-
 # 2、print() 函数输出给定参数的值。除了可以以单一的表达式作为参数（比如，前面的计算器的例子），它还能处理多个参数，包括浮点数与字符串。
 # 它输出的字符串不带引号，且各参数项之间会插入一个空格，这样可以实现更好的格式化操作：
+
+if __name__ == '__main__':
+    '''
+    0、多重赋值, 打印
+    '''
+    a, b, c = 3, 'five', [3, 5, 'test_strs']
+    print('a =', a, 'b =', b, 'c =', c)
+    print(f'a = {a}, b = {b}, c = {c}')
+    print('a = %d, b = %s, c = %s' % (a, b, c))
+
+    print('-----------------------')
+
+    '''
+    1、数字运算
+        1、混合类型运算时会把整数转换为浮点数
+        2、交互模式下会把上次输出的表达式会赋给变量 _ ,下次计算是可以直接使用 _ 变量
+        3、 ** 比 - 的优先级更高, 所以 -3**2 会被解释成 -(3**2) ，因此, 结果是 -9。要避免这个问题,并且得到 9, 可以用 (-3)**2
+    '''
+    print("15+6 =", 15+6)
+    print("15-6 =", 15-6)
+    print("15*6 =", 15*6)
+    print("15/6 =", 15/6)
+    print("15%6 =", 15%6)
+    print("15//6 =", 15//6)
+    print("15**6 =", 15**6)
+    print("(-15)**6 =", (-15)**6)
+
+    print('-----------------------')
+
+    '''
+    2、类型转换
+        int, float, complex : 整型，浮点型，复数
+        chr, str, ord: 字符，字符串, 字符转 unicode 码
+        hex, oct: 整型转16进制, 转8进制
+        repr, eval: 对象转字符串，执行字符串的表达式
+        list, tuple, dict, set, frozenset: 数据结构 列表，元组，字典，集合，不可变集合
+    '''
+    print('int(\'9754\') = %d' % int('9754'))   # 字符串转整型
+    print('str(9754) = %s' % str(9754))         # 整型转字符串
+
+    print('****')
+
+    print('A = %c' % 'A')       # 打印字符
+    print('ABC = %s' % 'ABC')   # 打印字符串
+    print('ord(\'A\'):', ord('A'), ', ord(\'a\'):', ord('a')) # 打印字符 unicode 码
+
+    print('****')
+
+    print('hex(3913):', hex(3913))  # 转 16进制
+    print('oct(3913):', oct(3913))  # 转 8 进制
+    print('int(hex(3913), 16):', int(hex(3913), 16)) # 转 10 进制
+
+    print('****')
+
+    list_str = repr([9, 5, 'test', 26]) # 列表转字符串
+    print('list_str = %s, len(list_str) = %d, type(list_str) = %s' % (list_str, len(list_str), type(list_str)))
+
+    act_list = eval(list_str)           # 字符串转列表
+    print('eval(list_str) = %s, len(ac_list) = %d, type(act_list) = %s' % (act_list, len(act_list), type(act_list)))
+
+    print('-----------------------')
+
+    '''
+    3、字符串 - 使用单引号或者双引号表示
+        1、字符串包含多行时可以使用三重引号
+        2、字符串是只读的, 不能修改
+        3、字符串遍历
+            字符串可以通过下标访问，下标可以是负数，下标可以用len 配合range函数
+            字符串切片 word[:2], 下标从0开始，不包含结束下标的元素
+                通过下标访问越界会报错，但切片下标越界不会报错，会自行处理
+        4、字符串拼接
+            使用 + 用于多字符串的合并，或者字符串和变量的合并
+            * 可以用于生成重复的多个字符串
+    '''
+    print(r'C:\some\name') # 打印反协杠
+
+    print('****')
+
+    # 三重引号
+    print('''Usage: thingy [OPTIONS]
+    -h                        Display this usage message
+    -H hostname               Hostname to connect to ''')
+
+    print("****")
+
+    word = 'hello world '
+
+    # !! 字符串只读，不能像下面这样修改
+    # word[6:] = 'lc'
+    print(' word[:6] + \'lc\' = ', word[:6] + 'lc')
+
+    print('****')
+
+    # 通过下标遍历字符串
+    for i in range(len(word)):
+        print(word[i], end = '')
+    print()
+
+    # 下标越界报错
+    # print('word[12] = ', word[12])
+
+    # 切片越界不会报错
+    print('word[12:] = ', word[12:])
+
+    print('****')
+
+    # 字符串拼接
+    print('hel' 'lo' ' ' 'wor' 'ld')
+    print('word + str(3):', word + str(3))
+    print('3 * word = ', 3 * word)
+
+    print('-----------------------')
+
+    '''
+    4、列表
+        列表使用方括号标注，逗号分隔的一组值，且列表可以嵌套列表
+
+        列表遍历
+            可以通过下标遍历，可以切片, 可以通过下标修改，可以通过切片修改
+        列表拼接
+            + 操作符可以合并两个列表
+            list.append() 添加元素到列表末尾
+            切片修改列表，切片清空，切片删除等
+
+        !!! 注意：
+        可变对象（如列表、字典）：当你将一个可变对象（如列表）赋值给另一个变量时，两个变量会指向同一个对象。如果你通过其中一个变量修改该对象的内容，另一个变量也会受到影响。
+        不可变对象（如整数、字符串、元组）：如果你将不可变对象赋值给另一个变量，两个变量会分别持有独立的副本，修改一个变量的值不会影响另一个变量。
+    '''
+
+    list_test = [1, 4, 9, 16, 'test', ['sum', 'te', 3, 10]]
+    print('list_test:', list_test)
+
+    list_back = list_test[-1]       # 可变对象，这样相当于引用
+    # list_back2 = list_test[-1].copy() # 可变对象，相当于引用的浅拷贝，里面的可变元素相当于引用，不可变元素相当于深拷贝, list_test[-1].copy() 等价与 list_test[-1][:]
+    list_back[1] = "tim"
+
+    print('list_back:', list_back)
+    print('list_test:', list_test)
+
+    # 下标遍历
+    for i in range(len(list_test)) :
+        print('list_test[i] = ', list_test[i])
+
+    # 列表拼接
+    print('list_test + [9, 8, 7] = ', list_test + [9, 8, 7])
+
+    list_test.append(3)
+    print('list_test.append(3):', list_test)
+
+    # 切片修改
+    list_test[:3] = [34, 28]
+    print('list_test:', list_test)
+
+    # 切片删除指定下标的元素
+    list_test = list_test[:3]
+    print('list_test after slicing:', list_test)
+
+    # 切片清空
+    list_test[:] = []
+    print('list_test[:] = [] -> :', list_test)
+
+    list_test2 = [0, 1, 2, 3, 4]
+    print('list_test2[:2] = ', list_test2[:2])
+    print('list_test2[:-3] = ', list_test2[:-3])
+
 
 
