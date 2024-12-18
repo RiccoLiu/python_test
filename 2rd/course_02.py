@@ -438,6 +438,9 @@ if __name__ == '__main__':
     fs = frozenset([1, 2, 3])
     values = ["first", "second", "third"]
 
+    print('fs:', fs)
+    print('values:', values)
+
     # 使用 zip() 和字典推导式
     my_dict = {key: value for key, value in zip(fs, values)}
     print(my_dict)
