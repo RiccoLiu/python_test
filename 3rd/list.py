@@ -145,3 +145,11 @@ if __name__ == '__main__':
 
     list_str_idx = list_num7.index(list_str, 7, len(list_num7))
     print('list_str_idx: ', list_str_idx)
+
+    '''
+        使用 - 连接列表的元素
+    '''
+    date = ['2024-07-08', '2024-08-09', 'test']
+    date_str = '-'.join(date)
+    print(f'date = {date}, data_str: {date_str}')
+    

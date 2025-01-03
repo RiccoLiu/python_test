@@ -39,7 +39,7 @@ conda deactivate
 conda env list  
 
 - 删除环境  
-conda env remove -n py_3.10 –all  
+conda remove -n py_3.10 --all  
 
 - 更新conda  
 conda update conda  
@@ -67,5 +67,6 @@ conda env create -f environment.yml
 - 更新环境
 conda env update -n base -f conda_environment.yaml  
 
-
+- 禁用自动激活  
+conda config --set auto_activate_base false  
 
