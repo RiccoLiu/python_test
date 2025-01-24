@@ -1,0 +1,4 @@
+#!/bin/bash
+export URL=192.168.68.112:9000
+export ACCESS_ID=J6F3fiA7bI5DkBn3
+export ACCESS_KEY=moHKWcs2B841AJL752UZFa6nVnDuFOhN

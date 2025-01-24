@@ -59,7 +59,7 @@ conda clean -i
 pip freeze > pip_requirements.txt  
 conda list -e > conda_requirements.txt  
 conda env export --name py3.10 > environment.yml  
-conda env export --name py3.10 --no-builds > py3.10.yml  
+conda env export --name py3.10 --no-builds > py3.10.yml  # 去除包的构建信息，只保留包的版本信息
 
 - 导入环境  
 conda env create -f environment.yml  
