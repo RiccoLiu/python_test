@@ -41,11 +41,11 @@ remote_server = '192.168.2.7'
 # ]
 
 remote_server_path = [
-'BugInfo(2023.12.7启用)/CP121010.VW(CNS3.0-GP)/常规路测',
-'BugInfo-Ⅰ（20240201启用）/CP121010.VW(CNS3.0-GP)/常规路测',
+'BugInfo(2023.12.7启用)/CP121010.VW(CNS3.0-GP)/常规路测', # done
+'BugInfo-Ⅰ（20240201启用）/CP121010.VW(CNS3.0-GP)/常规路测', # done
 
-'BugInfo-Ⅰ（20240201启用）/ARS2',
-'BugInfo-Ⅰ（20240730启用）/CP121019.南北大众_GP_SOP2/常规路测',
+'BugInfo-Ⅰ（20240201启用）/ARS2', # done
+'BugInfo-Ⅰ（20240730启用）/CP121019.南北大众_GP_SOP2/常规路测', # done
 
 'BugInfo(2024.09.05启用)/CP121019.南北大众_GP_SOP2/常规路测',
 ]

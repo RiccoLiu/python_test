@@ -11,6 +11,8 @@
 //192.168.2.7/BugInfo(2023.12.7启用)/CP121010.VW(CNS3.0-GP)/外部bug相关附件
 //192.168.2.7/BugInfo(2023.12.7启用)/CP121010.VW(CNS3.0-GP)/验收路测
 
+smbclient "//192.168.2.7/BugInfo(2023.12.7启用)" -U mansion%MXzaq1
+
 -----------
 
 //192.168.2.7/BugInfo-Ⅰ（20240201启用）/CP121008.VW(GP-AR-NAVIGATION)/客户路测DVR原视频
@@ -20,7 +22,7 @@
 //192.168.2.7/BugInfo-Ⅰ（20240201启用）/CP121019.南北大众_GP_SOP2/客户路测
 //192.168.2.7/BugInfo-Ⅰ（20240201启用）/ARS2
 
-smbclient "//192.168.2.7/buginfo-ⅰ（20240201启用）/" -U mansion -c "recurse ON; prompt OFF; cd CP121008.VW(GP-AR-NAVIGATION)/客户路测DVR原视频; mget *"
+smbclient "//192.168.2.7/buginfo-ⅰ（20240201启用）/" -U mansion%MXzaq1 -c "recurse ON; prompt OFF; cd CP121008.VW(GP-AR-NAVIGATION)/客户路测DVR原视频; mget *"
 
 cd "/data/lc/buginfo-ⅰ（20240201启用）/CP121010.VW(CNS3.0-GP)/常规路测" 
 smbclient "//192.168.2.7/buginfo-ⅰ（20240201启用）/" -U mansion -c "recurse ON; prompt OFF; cd CP121010.VW(CNS3.0-GP)/常规路测; mget *"

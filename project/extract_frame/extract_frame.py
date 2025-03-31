@@ -33,7 +33,10 @@ def ExtractVideoFrame(video_path, output_path):
             
             if not os.path.exists(video_output_path):
                 os.makedirs(video_output_path)
-
+            else:
+                print(f'{video_output_path} already exists..')    
+                continue
+            
             print('-----------------------------------')
             print(f'output_path:{output_path}')
             print(f'root:{root}')
