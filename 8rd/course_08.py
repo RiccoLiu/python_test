@@ -192,3 +192,16 @@ if __name__ == '__main__':
     print('------------ arr reshape: -------------------------') 
     arr.reshape((-1, 1, 2))
     print(arr)
+    
+    mask = np.array([[0, 1, 2],
+                    [0, 0, 0]])
+    threshold = 0.5
+
+    whe = np.where(mask > threshold)
+    print(f'whe:{whe}')
+    
+    rcs = np.column_stack(whe)
+    print(f'rcs:{rcs}')
+    
+    xys = rcs[:, ::-1]
+    print(f'xys:{xys}')
