@@ -15,6 +15,16 @@ import numpy as np
 from PIL import Image
 from loguru import logger
 
+# logger.add("my_log.log")
+
+import logging
+
+logging.basicConfig(
+    # filename=os.path.join(PROJECT_HOME, "output", "dataset-generator.log"),
+    format='%(asctime)s - %(levelname)s - %(filename)s:%(funcName)s @ %(lineno)d - %(message)s',
+    level=logging.NOTSET,
+)
+
 
 # 查看图片通道和分辨率
 # python -c "from PIL import Image; image = Image.open('1039.jpeg');  print(f' image.mode: {image.mode}, size:{image.size}')"
@@ -55,12 +65,25 @@ def coord_test():
     end_y = 1079
     R = 32
     
-    ys = np.linspace(end_y, start_y, R)
+    # 生成插值点
+    ys = np.linspace(start_y, end_y, num=3)
     logger.info(f'ys: {ys}, type{type(ys)}')
 
-    # numpy.ndarray 转 list
-    ys_list = ys.tolist()
-    logger.info(f'ys_list: {ys_list}, type{type(ys_list)}') 
+    # 6、线形回归拟合直线
+    def get_angle(xs, y_samples):
+        '''
+            线形回归拟合直线计算与y轴的角度，取值范围[-PI / 2, PI / 2]
+        '''
+        from sklearn.linear_model import LinearRegression
+        lr = LinearRegression()
+        xs, ys = xs[xs >= 0], y_samples[xs >= 0] # 计算 
+        if len(xs) > 1:
+            lr.fit(ys[:, None], xs) # 计算 xs = k * ys + b
+            k = lr.coef_[0]
+            theta = np.arctan(k) # y轴角度
+        else:
+            theta = 0
+        return theta
 
 def pathlib_test():
     '''
@@ -252,6 +275,10 @@ def dict_test():
     count = hist.get("test", 0)
     hist["test"] = count + 1
     
+    # 字典更新
+    hist2 = { "test" : 100, 'test2': 200}
+    hist.update(hist2)
+    
 def pil_draw_test():
     from PIL import Image, ImageDraw
 
@@ -387,6 +414,8 @@ def pil_img_test():
 def np_test(): 
     import numpy as np
     
+    # np.squeeze() # 去除单维度
+    
     # 1、创建np.array    
     small_arr = np.array([[1, 2, 3], [4, 5, 6]], dtype=np.int32)
     
@@ -432,6 +461,9 @@ def np_test():
     # 2.1、基本用法： [起始下标:结束下标:步长]
     print("\n第2-3行，第1-3列:")
     print(arr[1:3, 0:3])
+
+    arr_list = arr.tolist()
+    print(f'arr_list: {arr_list}, type{type(arr_list)}') 
 
     # 每隔一行取数据
     print("\n每隔一行取数据:")
@@ -754,8 +786,101 @@ def np_test():
     result[mask] = np.sin(arr[mask])
     
 
+    # 广播机制
+    arr = np.arange(6).reshape(6, 1) # (6, 1)
+    arr2 = np.array([1, 2]) # (2,)
+    arr3 = arr/ arr2
+
+    '''
+        广播流程：
+        1. arr2的形状(2,)被扩展为(1, 2)，即变为[[1, 2]]。
+        2. arr的形状(6, 1)与arr2的形状(1, 2)进行广播，变为(6, 2)，即变为：
+           [[0, 0],
+            [1, 1],
+            [2, 2],
+            [3, 3],
+            [4, 4],
+            [5, 5]]
+        3. 最终结果是将arr的每一行除以arr2的每一列，得到一个新的数组，其形状为(6, 2)。
+        4. 最终结果为：
+           [[0. , 0. ],
+            [1. , 0.5],
+            [2. , 1. ],
+            [3. , 1.5],
+            [4. , 2. ],
+            [5. , 2.5]]
+    '''
+
+    logger.info(f'arr.shape: {arr.shape}, arr:{arr}')
+    logger.info(f'arr2.shape: {arr2.shape}, arr2:{arr2}')
+    logger.info(f'arr3.shape: {arr3.shape}, arr3:{arr3}')
+
+    # pos_x = torch.stack((pos_x[:, :, :, 0::2].sin(), pos_x[:, :, :, 1::2].cos()), dim=4).flatten(3) 
+    # pos_y = torch.stack((pos_y[:, :, :, 0::2].sin(), pos_y[:, :, :, 1::2].cos()), dim=4).flatten(3)
+
+    arr = np.arange(240).reshape(2,3,4,5,2)
+    logger.info(f'arr.shape: {arr.shape}')
+
+    # arr2 = arr.flatten(3)
+    # logger.info(f'arr2.shape: {arr2.shape}')
+
+
+
+def deep_learning_test():
+    # 1.chunk size
+    batch_size = 32
+    num_gpu = 3
+     
+    num_imgs_per_gpu = batch_size // num_gpu
+    chunk_sizes = [num_imgs_per_gpu] * (num_gpu - 1)
+    chunk_sizes.append(batch_size - sum(chunk_sizes))
+    
+    logger.info(f"batch_size: {batch_size}, num_gpu: {num_gpu}, num_imgs_per_gpu: {num_imgs_per_gpu}, chunk_sizes: {chunk_sizes}")
+    # pass
+
+    # mask  = np.ones((1, img.shape[0], img.shape[1], 1), dtype=np.bool)
+    # masks[b_ind]    = np.logical_not(mask[:, :, :, 0])
+
+    # old_lanes = anno['lanes']
+    # categories = anno['categories'] if 'categories' in anno else [1] * len(old_lanes)
+    # old_lanes = zip(old_lanes, categories)
+
+    # resized_mask  = cv2.resize(pad_mask, (pad_h, pad_w))
+    # resized_mask.squeeze()
+
+
+    arr = np.arange(36).reshape(2, 3, 6)  # shape = (2, 3, 6)
+
+
+    logger.info(f"arr.shape: {arr.shape}, arr.ndim: {arr.ndim}, arr.dtype: {arr.dtype}")
+
+
+    arr2 = arr[:, :, :, None] 
+    logger.info(f"arr2.shape: {arr2.shape}, arr2.ndim: {arr2.ndim}, arr2.dtype: {arr2.dtype}")
+
+    arr3 = arr2 / 12
+    logger.info(f"arr3.shape: {arr3.shape}, arr3.ndim: {arr3.ndim}, arr3.dtype: {arr3.dtype}")
+
+
+    dim_t = np.arange(16)
+    dim_t = 10000 ** (2 * np.divmod(dim_t, 2)[0] / 16)  # o: [1, 1]
+
+
+    logger.info(f'dim_t: {dim_t}')
+    logger.info(f"dim_t.shape: {dim_t.shape}, dim_t.ndim: {dim_t.ndim}, dim_t.dtype: {dim_t.dtype}")
+
+    arr4 = arr2 / dim_t
+    logger.info(f"arr4.shape: {arr4.shape}, arr4.ndim: {arr4.ndim}, arr4.dtype: {arr4.dtype}")
+
+
+
 if __name__ == '__main__':    
-    # coord_test()
+    logger.info('logger test')
+    logging.info(' logging test')
+    
+        
+    # deep_learning_test()
+    coord_test()
     # pathlib_test()
     # mask_test()
     # dict_test()
@@ -763,7 +888,7 @@ if __name__ == '__main__':
     # pil_img_test()
     # pil_draw_test()
 
-    np_test()
+    # np_test()
 
     # # 读每一行文件，以空格为分割符解析
     # with open("pred.txt", 'r') as f:
