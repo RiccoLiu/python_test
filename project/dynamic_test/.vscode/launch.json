@@ -1,0 +1,45 @@
+{
+    "version": "0.2.0",  // JSON 配置版本号 (固定值)
+    "configurations": [   // 调试配置数组，可以包含多个配置
+        {   // 单个调试配置对象开始
+            "name": "Python: Remote Debug",  // 调试配置名称（在调试下拉菜单中显示）
+            
+            "type": "python",  // 调试器类型，指定为 Python
+            
+            "request": "launch",  // 启动类型：launch（启动新进程）或 attach（附加到现有进程）
+            
+            "program": "${workspaceFolder}/core3.py",  // 要调试的主程序路径
+            // ${workspaceFolder} 是 VSCode 预定义的变量，表示当前打开的工作区根目录
+            
+            "args": [  // 传递给程序的命令行参数数组
+            ],
+            
+            "console": "integratedTerminal",  // 在集成终端中运行程序（而非调试控制台）
+            // 选项：integratedTerminal（内置终端）、internalConsole（内置控制台）、externalTerminal（外部终端）
+            
+            "justMyCode": false,  // 是否仅调试用户代码（false 表示也调试第三方库）
+            // 设置为 false 可以在库代码（如 mmengine）中设置断点
+            
+            "cwd": "${workspaceFolder}",  // 程序的工作目录（启动时的工作路径）
+            // 程序中的相对路径（如配置文件路径）将基于此目录解析
+            
+            "python": "/home/lc/anaconda3/envs/py_3.10/bin/python",  // 指定使用的 Python 解释器绝对路径
+            // 这是最关键参数之一，确保使用正确的环境和依赖
+            
+            "pathMappings": [  // 本地与远程路径映射（主要用于远程调试）
+                {
+                    "localRoot": "${workspaceFolder}",  // 本地（VSCode 看到的）项目路径
+                    "remoteRoot": "${workspaceFolder}"  // 远程服务器上的实际路径
+                }
+            ],
+            // 对于 SSH 远程开发，通常两者相同；对于远程附加调试，可能需要调整映射关系
+            
+            "env": {  // 设置环境变量
+                "PYTHONPATH": "${workspaceFolder}:${env:PYTHONPATH}"  // 自定义 Python 搜索路径
+
+            },
+            // 这里确保项目目录在 sys.path 中，同时保留现有的 PYTHONPATH 值
+            // ${env:PYTHONPATH} 获取系统环境变量中的 PYTHONPATH 值
+        }   // 单个调试配置对象结束
+    ]
+}
